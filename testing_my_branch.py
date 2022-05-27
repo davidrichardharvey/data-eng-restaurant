@@ -1,1 +1,5 @@
-print("Only testing the branch")
+
+check = "Check my branch"
+
+for i in check:
+    print(i)
