@@ -10,7 +10,7 @@ class UnitTests(unittest.TestCase):
 
     def test_order(self):
         self.table02.order('Food', 10.00, 3)
-        actual = self.table02.bill
+        actual = self.table02._bill
         expected = [{
             'item': 'Food',
             'price': 10.00,
@@ -22,7 +22,7 @@ class UnitTests(unittest.TestCase):
 
     def test_order_no_quantity(self):
         self.table02.order('Food', 10.00)
-        actual = self.table02.bill
+        actual = self.table02._bill
         expected = [{
             'item': 'Food',
             'price': 10.00,
@@ -35,7 +35,7 @@ class UnitTests(unittest.TestCase):
     def test_remove(self):
         self.table02.order('Food', 10.00, 5)
         self.table02.remove('Food', 10.00, 3)
-        actual = self.table02.bill
+        actual = self.table02._bill
         expected = [{
             'item': 'Food',
             'price': 10.00,
