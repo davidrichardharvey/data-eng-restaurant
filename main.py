@@ -1,6 +1,6 @@
 from restaurant import Table
 from unittest import main
-print("Ahmed test")
+print("test - ahmed")
 table01 = Table(5)
 table01.order("Risotto", 12.50, 2)
 print(table01.bill)
