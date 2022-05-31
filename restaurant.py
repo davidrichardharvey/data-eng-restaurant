@@ -3,11 +3,13 @@ class Table:
     def __init__(self):
         self.bill = []
 
+    def order(self, item, price, quantity=1):
 
-    def order(self, item, quantity):
-        quantity = 1
-
-
+        for item in self.bill:
+            if item['item'] == item and item['price'] == price:
+                item['quantity'] += quantity
+            else:
+                self.bill.append({"item": item, "price": price, "quantity": quantity})
 
         # variables items, price and quantity
         # quantity should be defaulted at 1
