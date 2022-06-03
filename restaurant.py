@@ -1,46 +1,48 @@
 class Table:
 
-    def __init__(self):
+    def __init__(self, guest):
         self.bill = []
+        self.guest = guest
 
     def order(self, item, price, quantity=1):
 
-        for item in self.bill:
-            if item['item'] == item and item['price'] == price:
-                item['quantity'] += quantity
+        for food in self.bill:
+            if food['item'] == food and food['price'] == price:
+                food['quantity'] += quantity
             else:
                 self.bill.append({"item": item, "price": price, "quantity": quantity})
 
-        # variables items, price and quantity
-        # quantity should be defaulted at 1
-        # the items on the bill should be appended to a dictionary
-        # update the quantity to the bill if needed
-        pass
-
-    def remove(self):
-        # same sort of principle as order but should remove the quantity
-        # if the quantity is 0 remove it off the bill completely
-        #  return True unless there is not an item with the corresponding item name and price
-        # return False and make no change to the bill.
-        pass
+    def remove(self, item, price, quantity):
+        no_food = False
+        good_food = True
+        for food in self.bill:
+            if food['item'] == item and food['price'] == price:
+                if food['quantity'] > quantity:
+                    food['quantity'] -= quantity
+                    return good_food
+                else:
+                    return no_food
+        return no_food
 
     def get_subtotal(self):
+        subtotal = 0
+        for food in self.bill:
+            subtotal += food['price'] * food['quantity']
+            subtotal.__round__(2)
+        return subtotal
         # method that returns the total cost for the table
         # based on the prices and quantities in the bill
-        pass
 
-    def get_total(self):
-        # return a dictionary with the
-        # following keys: Sub Total, Service Charge, Total
-
-        # The values should be string representations of
-        # the corresponding prices in British pounds and pence
-
-        pass
+    def get_total(self, service=0.1):
+        total = self.get_subtotal()
+        return {
+            'Sub Total': f'£{total:.2f}',
+            'Service Charge': f'{total * service:.2f}',
+            'Total': f'£{total * (1 + service): .2f}'
+            }
 
     def split_bill(self):
-        # which returns the the subtotal cost of the bill
-        # divided by the number of diners as a float rounded up to the nearest penny.
-        pass
+        return round(self.get_subtotal()/self.guest, 2)
 
-    pass
+
+
